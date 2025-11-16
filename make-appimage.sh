@@ -1,16 +1,15 @@
 #!/bin/sh
 
-set -eux
+set -eu
 
-ARCH="$(uname -m)"
-VERSION="$(cat ~/version)"
-SHARUN="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/quick-sharun.sh"
-
-# Variables used by quick-sharun
+ARCH=$(uname -m)
+VERSION=$(pacman -Q clapper | awk '{print $2; exit}')
+export ARCH VERSION
+export OUTPATH=./dist
+export ADD_HOOKS="self-updater.bg.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
-export OUTNAME=clapper-"$VERSION"-anylinux-"$ARCH".AppImage
-export DESKTOP=/usr/share/applications/com.github.rafostar.Clapper.desktop
 export ICON=/usr/share/icons/hicolor/scalable/apps/com.github.rafostar.Clapper.svg
+export DESKTOP=/usr/share/applications/com.github.rafostar.Clapper.desktop
 export DEPLOY_OPENGL=1
 export DEPLOY_GSTREAMER=1
 export STARTUPWMCLASS=clapper # For Wayland, this is 'com.github.rafostar.Clapper', so this needs to be changed in desktop file manually by the user in that case until some potential automatic fix exists for this
@@ -26,14 +25,7 @@ else
 fi
 
 # Trace and deploy all files and directories needed for the application (including binaries, libraries and others)
-wget --retry-connrefused --tries=30 "$SHARUN" -O ./quick-sharun
-chmod +x ./quick-sharun
-./quick-sharun /usr/bin/clapper -- https://test-videos.co.uk/vids/bigbuckbunny/mp4/h265/1080/Big_Buck_Bunny_1080_10s_1MB.mp4
+quick-sharun /usr/bin/clapper -- https://test-videos.co.uk/vids/bigbuckbunny/mp4/h265/1080/Big_Buck_Bunny_1080_10s_1MB.mp4
 
-# Make the AppImage with uruntime
-./quick-sharun --make-appimage
-
-# Prepare the AppImage for release
-mkdir -p ./dist
-mv -v ./*.AppImage* ./dist
-mv -v ~/version     ./dist
+# Turn AppDir into AppImage
+quick-sharun --make-appimage

@@ -12,7 +12,8 @@ export ICON=/usr/share/icons/hicolor/scalable/apps/com.github.rafostar.Clapper.s
 export DESKTOP=/usr/share/applications/com.github.rafostar.Clapper.desktop
 export DEPLOY_OPENGL=1
 export DEPLOY_GSTREAMER=1
-export STARTUPWMCLASS=clapper # For Wayland, this is 'com.github.rafostar.Clapper', so this needs to be changed in desktop file manually by the user in that case until some potential automatic fix exists for this
+export STARTUPWMCLASS=clapper
+export GTK_CLASS_FIX=1
 
 sys_clapper_dir=$(echo /usr/lib/clapper-*)
 if [ -d "$sys_clapper_dir" ]; then

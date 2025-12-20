@@ -12,6 +12,7 @@ export ICON=/usr/share/icons/hicolor/scalable/apps/com.github.rafostar.Clapper.s
 export DESKTOP=/usr/share/applications/com.github.rafostar.Clapper.desktop
 export DEPLOY_OPENGL=1
 export DEPLOY_GSTREAMER=1
+export STARTUPWMCLASS=com.github.rafostar.Clapper # Default to Wayland's wmclass. For X11, GTK_CLASS_FIX will force the wmclass to be the Wayland one.
 export GTK_CLASS_FIX=1
 
 sys_clapper_dir=$(echo /usr/lib/clapper-*)

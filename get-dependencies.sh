@@ -4,10 +4,6 @@ set -eu
 
 ARCH=$(uname -m)
 
-echo "Installing debloated packages..."
-echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini intel-media-driver
-
 echo "Installing package and its dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
@@ -20,3 +16,7 @@ pacman -Syu --noconfirm \
 if [ "$ARCH" = 'x86_64' ]; then
   pacman -Syu --noconfirm libva-intel-driver
 fi
+
+echo "Installing debloated packages..."
+echo "---------------------------------------------------------------"
+get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini intel-media-driver

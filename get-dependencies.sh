@@ -9,6 +9,7 @@ echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
             clapper \
             gst-plugins-bad \
+            gst-libav \
             gst-plugin-va \
             ffmpeg
 

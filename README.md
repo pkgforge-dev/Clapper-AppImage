@@ -1,34 +1,32 @@
-# Clapper-AppImage 🐧
+# Clapper AppImage 🐧
 
 [![GitHub Downloads](https://img.shields.io/github/downloads/pkgforge-dev/Clapper-AppImage/total?logo=github&label=GitHub%20Downloads)](https://github.com/pkgforge-dev/Clapper-AppImage/releases/latest)
 [![CI Build Status](https://github.com//pkgforge-dev/Clapper-AppImage/actions/workflows/appimage.yml/badge.svg)](https://github.com/pkgforge-dev/Clapper-AppImage/releases/latest)
+[![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/Clapper-AppImage)](https://github.com/pkgforge-dev/Clapper-AppImage/releases/latest)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Rafostar/clapper/refs/heads/master/src/bin/clapper-app/data/icons/hicolor/scalable/apps/com.github.rafostar.Clapper.svg" width="128" />
 </p>
 
-* [Latest Stable Release](https://github.com/pkgforge-dev/Clapper-AppImage/releases/latest)
+* [Upstream URL](https://github.com/Rafostar/clapper)
 
 ---
 
-AppImage made using [sharun](https://github.com/VHSgunzo/sharun), which makes it extremely easy to turn any binary into a portable package without using containers or similar tricks. 
+AppImage made using [sharun](https://github.com/VHSgunzo/sharun) and its wrapper [quick-sharun](https://github.com/pkgforge-dev/Anylinux-AppImages/blob/main/useful-tools/quick-sharun.sh), which makes it easy and reliable to turn any binary into a portable package without using containers or similar tricks. 
 
-**This AppImage bundles everything and should work on any linux distro, even on musl based ones.**
+**This AppImage bundles everything and it should work on any Linux distro, including old and musl-based ones.**
 
-It is possible that this appimage may fail to work with appimagelauncher, I recommend these alternatives instead: 
+This AppImage doesn't require FUSE to run at all, thanks to the [uruntime](https://github.com/VHSgunzo/uruntime).
 
-* [AM](https://github.com/ivan-hc/AM) `am -i clapper` or `appman -i clapper`
-
-* [dbin](https://github.com/xplshn/dbin) `dbin install clapper.appimage`
-
-* [soar](https://github.com/pkgforge/soar) `soar install clapper`
-
-This appimage works without fuse2 as it can use fuse3 instead, it can also work without fuse at all thanks to the [uruntime](https://github.com/VHSgunzo/uruntime)
+This AppImage is also supplied with the seamless self-updater by default, so any updates to this application won't be missed.  
+Self-updater doesn't run if AppImage managers like [am](https://github.com/ivan-hc/AM) or [soar](https://github.com/pkgforge/soar) exist, which manage AppImage integration and updates.
 
 <details>
-  <summary><b><i>raison d'être</i></b></summary>
+  <summary><b><i>Filesize efficiency compared to flatpak</i></b></summary>
     <img src="https://github.com/user-attachments/assets/29576c50-b39c-46c3-8c16-a54999438646" alt="Inspiration Image">
   </a>
 </details>
+
+---
 
 More at: [AnyLinux-AppImages](https://pkgforge-dev.github.io/Anylinux-AppImages/)

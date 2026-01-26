@@ -1,3 +1,5 @@
+<div align="center">
+
 # Clapper AppImage 🐧
 
 [![GitHub Downloads](https://img.shields.io/github/downloads/pkgforge-dev/Clapper-AppImage/total?logo=github&label=GitHub%20Downloads)](https://github.com/pkgforge-dev/Clapper-AppImage/releases/latest)
@@ -8,7 +10,11 @@
   <img src="https://raw.githubusercontent.com/Rafostar/clapper/refs/heads/master/src/bin/clapper-app/data/icons/hicolor/scalable/apps/com.github.rafostar.Clapper.svg" width="128" />
 </p>
 
-* [Upstream URL](https://github.com/Rafostar/clapper)
+| Latest Stable Release | Upstream URL |
+| :---: | :---: |
+| [Click here](https://github.com/pkgforge-dev/Clapper-AppImage/releases/latest) | [Click here](https://github.com/Rafostar/clapper) |
+
+</div>
 
 ---
 

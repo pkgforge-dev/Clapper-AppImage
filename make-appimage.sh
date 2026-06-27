@@ -13,6 +13,8 @@ export DESKTOP=/usr/share/applications/com.github.rafostar.Clapper.desktop
 export DEPLOY_GSTREAMER=1
 export STARTUPWMCLASS=com.github.rafostar.Clapper # Default to Wayland's wmclass. For X11, GTK_CLASS_FIX will force the wmclass to be the Wayland one.
 export GTK_CLASS_FIX=1
+export STRACE_BINARY=clapper
+export STRACE_FLAGS=https://test-videos.co.uk/vids/bigbuckbunny/mp4/h265/1080/Big_Buck_Bunny_1080_10s_1MB.mp4
 
 sys_clapper_dir=$(echo /usr/lib/clapper-*)
 if [ -d "$sys_clapper_dir" ]; then
@@ -25,7 +27,11 @@ else
 fi
 
 # Trace and deploy all files and directories needed for the application (including binaries, libraries and others)
-quick-sharun /usr/bin/clapper -- https://test-videos.co.uk/vids/bigbuckbunny/mp4/h265/1080/Big_Buck_Bunny_1080_10s_1MB.mp4
+quick-sharun /usr/bin/clapper
 
 # Turn AppDir into AppImage
 quick-sharun --make-appimage
+
+# Test the app for 12 seconds, if the test fails due to the app
+# having issues running in the CI use --simple-test instead
+quick-sharun --test ./dist/*.AppImage

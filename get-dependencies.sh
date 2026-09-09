@@ -7,23 +7,28 @@ ARCH=$(uname -m)
 echo "Installing package and its dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
-	glib2-devel      \
-	graphene         \
-	graphviz         \
-	gst-plugins-ugly \
-	gst-plugins-bad  \
-	gst-plugins-base \
-	gst-plugins-good \
-	gst-libav        \
-	gst-plugin-va    \
-	gstreamer        \
-	libadwaita       \
-	libmicrodns      \
-	libpeas-2        \
-	libsoup3         \
-	meson            \
-	ninja            \
-	pango
+	glib2-devel         \
+	gobject-introspection \
+	graphene            \
+	graphviz            \
+	gst-plugins-ugly    \
+	gst-plugins-bad     \
+	gst-plugins-base    \
+	gst-plugins-good    \
+	gst-libav           \
+	gst-plugin-va       \
+	gstreamer           \
+	libadwaita          \
+	libmicrodns         \
+	libpeas-2           \
+	libsoup3            \
+	meson               \
+	ninja               \
+	pango               \
+	python              \
+	python-cairo        \
+	python-gobject      \
+	yt-dlp
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
@@ -53,9 +58,25 @@ git clone https://github.com/Rafostar/clapper ./clapper && (
 		-D glimporter=enabled       \
 		-D gluploader=enabled       \
 		-D rawimporter=enabled      \
-		-D introspection=disabled   \
+		-D introspection=enabled    \
 		-D vapi=disabled            \
 		-D doc=false
+
+	meson compile -C build
+	meson install -C build
+)
+
+echo "Building Clapper Enhancers (yt-dlp support)..."
+echo "---------------------------------------------------------------"
+git clone https://github.com/Rafostar/clapper-enhancers ./clapper-enhancers && (
+	cd ./clapper-enhancers
+
+	git fetch --tags origin
+	TAG=$(git tag --sort=-v:refname | grep -vi 'rc\|alpha\|beta' | head -1)
+	git checkout "$TAG"
+
+	meson setup build --prefix=/usr --libdir=lib --buildtype=release \
+		-D enhancersdir=/usr/lib/clapper-0.0/enhancers
 
 	meson compile -C build
 	meson install -C build

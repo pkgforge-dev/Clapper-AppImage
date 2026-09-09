@@ -3,8 +3,7 @@
 set -eu
 
 ARCH=$(uname -m)
-VERSION=$(pacman -Q clapper | awk '{print $2; exit}')
-export ARCH VERSION
+export ARCH
 export OUTPATH=./dist
 export ADD_HOOKS="self-updater.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
@@ -16,22 +15,15 @@ export GTK_CLASS_FIX=1
 export STRACE_BINARY=clapper
 export STRACE_FLAGS=https://test-videos.co.uk/vids/bigbuckbunny/mp4/h265/1080/Big_Buck_Bunny_1080_10s_1MB.mp4
 
-sys_clapper_dir=$(echo /usr/lib/clapper-*)
-if [ -d "$sys_clapper_dir" ]; then
-	export PATH_MAPPING="
-		$sys_clapper_dir:\${SHARUN_DIR}/lib/${sys_clapper_dir##*/}
-	"
-else
-	>&2 echo "ERROR: Cannot find the clapper lib dir"
-	exit 1
-fi
+# Deploy dependencies
+clapper_dir=$(echo /usr/lib/clapper*)
+quick-sharun /usr/bin/clapper "$clapper_dir"
 
-# Trace and deploy all files and directories needed for the application (including binaries, libraries and others)
-quick-sharun /usr/bin/clapper
+echo "CLAPPER_SINK_IMPORTER_PATH=\${SHARUN_DIR}/lib/${clapper_dir##*/}/gst/plugin/importers" >> ./AppDir/.env
 
 # Turn AppDir into AppImage
 quick-sharun --make-appimage
 
 # Test the app for 12 seconds, if the test fails due to the app
 # having issues running in the CI use --simple-test instead
-quick-sharun --test ./dist/*.AppImage
+quick-sharun --test ./dist/*.AppImage $STRACE_FLAGS

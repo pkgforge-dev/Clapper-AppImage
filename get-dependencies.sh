@@ -10,6 +10,7 @@ pacman -Syu --noconfirm \
 	glib2-devel      \
 	graphene         \
 	graphviz         \
+	gst-plugins-ugly \
 	gst-plugins-bad  \
 	gst-plugins-base \
 	gst-plugins-good \
@@ -24,13 +25,9 @@ pacman -Syu --noconfirm \
 	ninja            \
 	pango
 
-if [ "$ARCH" = 'x86_64' ]; then
-	pacman -Syu --noconfirm libva-intel-driver
-fi
-
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini intel-media-driver
+get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini
 
 echo "Building Clapper..."
 echo "---------------------------------------------------------------"

@@ -20,6 +20,7 @@ export USE_HOST_DRIVERS_EXPERIMENTAL=1
 # Deploy dependencies
 clapper_dir=$(echo /usr/lib/clapper*)
 quick-sharun /usr/bin/clapper "$clapper_dir" \
+             /usr/bin/qjs \
              /usr/lib/libpeas-2/loaders/*
 
 echo "CLAPPER_SINK_IMPORTER_PATH=\${SHARUN_DIR}/lib/${clapper_dir##*/}/gst/plugin/importers" >> ./AppDir/.env

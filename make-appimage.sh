@@ -19,6 +19,13 @@ export USE_HOST_DRIVERS_EXPERIMENTAL=1
 
 # Deploy dependencies
 clapper_dir=$(echo /usr/lib/clapper*)
+
+# libpeas resolves its plugin loaders from a hardcoded absolute path,
+# map it so the python loader (used by the yt-dlp enhancer) is found
+export PATH_MAPPING="
+	/usr/lib/libpeas-2/loaders:\${SHARUN_DIR}/lib/libpeas-2/loaders
+"
+
 quick-sharun /usr/bin/clapper "$clapper_dir" \
              /usr/bin/yt-dlp \
              /usr/bin/qjs \

@@ -14,6 +14,7 @@ export STARTUPWMCLASS=com.github.rafostar.Clapper # Default to Wayland's wmclass
 export GTK_CLASS_FIX=1
 export STRACE_BINARY=clapper
 export STRACE_FLAGS=https://test-videos.co.uk/vids/bigbuckbunny/mp4/h265/1080/Big_Buck_Bunny_1080_10s_1MB.mp4
+export USE_HOST_DRIVERS_EXPERIMENTAL=1
 
 # Deploy dependencies
 clapper_dir=$(echo /usr/lib/clapper*)
